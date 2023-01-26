@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Race {
@@ -40,31 +41,33 @@ public class Race {
 
     private boolean getPointsFromUser(Scanner scanner,  Animal[] animals, int i, String type) {
         boolean truePoint = true;
+
+        int maxPoint=50;
+        Random random = new Random();
         try {
 
             if ((type.equals("beauty") && animals[i] instanceof Cat) || (type.equals("behavior") && animals[i] instanceof Cat)) {
                 Cat animal = (Cat) animals[i];
-                System.out.print(makeMessage(type) + animal.getName() + " állathoz: ");
+//                System.out.print(makeMessage(type) + animal.getName() + " állathoz: ");
                 switch (type) {
-                    case "beauty" -> animal.setBeautyPoint(scanner.nextInt());
-                    case "behavior" -> animal.setBahaviourPoint(scanner.nextInt());
+                    case "beauty" -> animal.setBeautyPoint(random.nextInt(maxPoint));
+                    case "behavior" -> animal.setBahaviourPoint(random.nextInt(maxPoint));
                 }
 
 
             } else {
                 Dog animal = (Dog) animals[i];
-                System.out.print(makeMessage(type) + animal.getName() + " állathoz: ");
+//                System.out.print(makeMessage(type) + animal.getName() + " állathoz: ");
                 switch (type) {
-                    case "beauty" -> animal.setBeautyPoint(scanner.nextInt());
-                    case "behavior" -> animal.setBahaviourPoint(scanner.nextInt());
-                    case "lojality" -> animal.setLojality(scanner.nextInt());
+                    case "beauty" -> animal.setBeautyPoint(random.nextInt(maxPoint));
+                    case "behavior" -> animal.setBahaviourPoint(random.nextInt(maxPoint));
+                    case "lojality" -> animal.setLojality(random.nextInt(maxPoint));
                 }
             }
 
             truePoint = false;
         } catch (InputMismatchException e) {
             System.out.println("Hibás pont");
-            truePoint = true;
             scanner.next();
         }
         return truePoint;
@@ -72,7 +75,7 @@ public class Race {
     }
 
     public void searcWinner() {
-        int max = 0;
+        int max = -1;
         Animal winner = null;
         for (Animal animal : registration.list) {
             if (animal.getAllPoint() > max) {
@@ -83,6 +86,7 @@ public class Race {
         System.out.println("a gyöztes: " + winner.getName() + "(" + winner.getAllPoint() + ")");
     }
 
+    /*
     public String makeMessage(String type){
         StringBuilder stringBuilder = new StringBuilder("");
         switch (type) {
@@ -92,4 +96,6 @@ public class Race {
         }
         return stringBuilder.toString();
     }
+    */
+
 }

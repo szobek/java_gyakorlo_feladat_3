@@ -61,20 +61,20 @@ public class Registration {
             birth = Integer.parseInt(replaceNonDigitCharacter(ad));
         }
         if (type == 1) {
-            createInstance(name, birth, "cat",arrayIndex);
+            createInstance(name, birth, AnimalType.Cat.toString(),arrayIndex);
         } else if (type == 2) {
-            createInstance(name, birth, "dog",arrayIndex);
+            createInstance(name, birth, AnimalType.Dog.toString(),arrayIndex);
         }
     }
 
     private void createInstance(String name, int by,String animal,int arrayIndex) {
         Animal animal1 = null;
         switch (animal) {
-            case "cat" -> {
+            case "Cat" -> {
                 animal1 = new Cat(name, by);
                 animal1.setStartNum(arrayIndex + 1);
             }
-            case "dog" -> {
+            case "Dog" -> {
                 animal1 = new Dog(name, by);
                 animal1.setStartNum(arrayIndex + 1);
             }
