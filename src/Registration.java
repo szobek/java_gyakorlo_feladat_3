@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Registration {
     Animal[] list;
-    private final String DELIMITER = ";";
 
     public List<String> readFileFromTxt() {
         String regFile = "D:\\project\\java\\gyakorlo_feladatok\\gyakorlo_feladat_3\\reg.txt";
@@ -16,13 +15,14 @@ public class Registration {
         try {
             lines = Files.readAllLines(Paths.get(regFile), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         list=new Animal[lines.size()];
         return lines;
     }
 
     public void createAnimals() {
+        String DELIMITER = ";";
         List<String> lines = readFileFromTxt();
         for (int i = 0; i < lines.size(); i++) {
             String all = lines.get(i);
