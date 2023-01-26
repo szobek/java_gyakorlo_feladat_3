@@ -2,12 +2,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Registration {
-    ArrayList<Animal> list = new ArrayList<>();
+    Animal[] list;
     private final String DELIMITER = ";";
 
     public List<String> readFileFromTxt() {
@@ -19,6 +18,7 @@ public class Registration {
         } catch (IOException e) {
             System.out.println(e);
         }
+        list=new Animal[lines.size()];
         return lines;
     }
 
@@ -28,13 +28,12 @@ public class Registration {
             String all = lines.get(i);
             String[] animalData = all.split(DELIMITER);
             if (animalData.length > 2) {
-                calculateAge(animalData[0], animalData[1], 1);
+                calculateAge(animalData[0], animalData[1], 1,i);
             } else {
-                calculateAge(animalData[0], animalData[1], 2);
+                calculateAge(animalData[0], animalData[1], 2,i);
 
             }
         }
-        writeAnimalsFromList();
     }
 
     private boolean checkCharacter(char c) {
@@ -54,7 +53,7 @@ public class Registration {
 
     }
 
-    private void calculateAge(String name, String ad, int type) {
+    private void calculateAge(String name, String ad, int type,int arrayIndex) {
         int birth;
         try {
             birth = Integer.parseInt(ad);
@@ -62,25 +61,37 @@ public class Registration {
             birth = Integer.parseInt(replaceNonDigitCharacter(ad));
         }
         if (type == 1) {
-            createInstance(name, birth, "cat");
+            createInstance(name, birth, "cat",arrayIndex);
         } else if (type == 2) {
-            createInstance(name, birth, "dog");
+            createInstance(name, birth, "dog",arrayIndex);
         }
     }
 
-    private void createInstance(String name, int by,String animal) {
+    private void createInstance(String name, int by,String animal,int arrayIndex) {
         Animal animal1 = null;
         switch (animal){
-            case "cat"->animal1=new Cat(name,by);
-            case "dog"->animal1=new Dog(name,by);
+            case "cat":
+                animal1=new Cat(name,by);
+                animal1.setStartNum(arrayIndex+1);
+                break;
+            case "dog":
+                animal1=new Dog(name,by);
+                animal1.setStartNum(arrayIndex+1);
+                break;
         }
-        list.add(animal1);
+
+        list[arrayIndex]=animal1;
 
     }
-    private void writeAnimalsFromList(){
+    public void writeAnimalsFromList(){
+            System.out.println("név | év");
         for(Animal animal:list){
-        boolean bool= animal instanceof Cat;
-            System.out.println(animal.getName()+" | "+animal.getAge()+" | "+((bool)?"macska":"kutya"));
+            boolean bool= animal instanceof Cat;
+            System.out.print(animal.getName()+" | "+animal.getAge()+" | "+((bool)?"macska | ":"kutya"+ " | "));
+            System.out.print(animal.getBeautyPoint()+" | "+animal.getBahaviourPoint());
+            System.out.print(" | "+animal.getStartNum());
+            System.out.println();
+
         }
     }
 }

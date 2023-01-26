@@ -4,6 +4,6 @@ public class Main {
     }
 
     private void run() {
-new Registration().createAnimals();
+        new Race().start();
     }
 }

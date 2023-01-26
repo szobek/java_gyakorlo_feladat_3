@@ -38,8 +38,24 @@ public abstract class  Animal {
         calculateAllPoint();
     }
 
+    public int getBeautyPoint() {
+        return beautyPoint;
+    }
+
+    public int getBahaviourPoint() {
+        return bahaviourPoint;
+    }
+
+    public int getAllPoint() {
+        return allPoint;
+    }
+
     public void setStartNum(int startNum) {
         this.startNum = startNum;
+    }
+
+    public int getStartNum() {
+        return startNum;
     }
 
     public void calculateAllPoint(){
