@@ -69,15 +69,15 @@ public class Registration {
 
     private void createInstance(String name, int by,String animal,int arrayIndex) {
         Animal animal1 = null;
-        switch (animal){
-            case "cat":
-                animal1=new Cat(name,by);
-                animal1.setStartNum(arrayIndex+1);
-                break;
-            case "dog":
-                animal1=new Dog(name,by);
-                animal1.setStartNum(arrayIndex+1);
-                break;
+        switch (animal) {
+            case "cat" -> {
+                animal1 = new Cat(name, by);
+                animal1.setStartNum(arrayIndex + 1);
+            }
+            case "dog" -> {
+                animal1 = new Dog(name, by);
+                animal1.setStartNum(arrayIndex + 1);
+            }
         }
 
         list[arrayIndex]=animal1;
